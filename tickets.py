@@ -120,13 +120,13 @@ class tickets(interactions.Extension):
   @interactions.extension_listener
   async def on_message_create(self, ctx: interactions.Message):
     if ctx.author.id == 1000965619530866760:
-        return
+      return
     else:
-        channel = await ctx.get_channel()
-        if str(ctx.author.id) in str(channel.topic):
-            if str(channel.parent_id) in str(962455110150144100) or str(1007090636274552842):
-                    await channel.modify(parent_id=694390326911303723)
-                    await channel.send(f"{ctx.author.mention} sent a message and re-opened the ticket!\n\nTo close this ticket, click the button on the pinned message")
+      channel = await ctx.get_channel()
+      if str(ctx.author.id) in str(channel.topic):
+        if str(channel.parent_id) in ["962455110150144100", "1007090636274552842"]: 
+          await channel.modify(parent_id=694390326911303723)
+          await channel.send(f"{ctx.author.mention} sent a message and re-opened the ticket!\n\nTo close this ticket, click the button on the pinned message")
 
   @interactions.extension_listener()
   async def on_ready(penis):
