@@ -51,7 +51,7 @@ class inrole(interactions.Extension):
               interactions.Option(
                 name="ephemeral",
                 description="Whether the message will appear to everyone",
-                type=interactions.OptionType.STRING,
+                type=interactions.OptionType.BOOLEAN,
                 required=False,
                 choices=[
                   interactions.Choice(
@@ -62,10 +62,8 @@ class inrole(interactions.Extension):
                     value="False")])])])
   async def inrole(self, ctx: interactions.CommandContext, sub_command: str, role: str = None, ephemeral: str = None):
     Staff = discord.utils.find(lambda r: r.id == 582646886696091669, ctx.guild.roles)
-    if ephemeral == "True":
-      eph = True
     if ephemeral == "False":
-      eph = False
+      ephemeral = False
     if sub_command == "teams":
       tc = 694367677262725212
       tcrole = 799846260026769449
@@ -86,14 +84,14 @@ class inrole(interactions.Extension):
           await ctx.send(":x: You may only inrole corporations or corporation captains!", ephemeral=True)
           return
         if str(ctx.channel_id) not in "582646964466745364":
-          eph = True
+          ephemeral = True
       if str(role.id) not in str(799846260026769449) or str(702755046387089458):
           await ctx.guild.get_all_members()
           names = []
           for member in list(ctx.guild.members):
               if str(role.id) in str(member.roles):
                   names.append(f"{member.mention} ({member.name})")
-      await ctx.send(f"Members in {role.mention}:\n\n" + str('\n'.join(names)), allowed_mentions={"parse": []}, ephemeral=eph)
+      await ctx.send(f"Members in {role.mention}:\n\n" + str('\n'.join(names)), allowed_mentions={"parse": []}, ephemeral=ephemeral)
       return
     await ctx.guild.get_all_roles()
     teamcaptainrole = discord.utils.find(lambda r: r.id == int(tc), ctx.guild.roles)
@@ -105,8 +103,8 @@ class inrole(interactions.Extension):
     await ctx.get_channel()
     if Staff.id not in ctx.author.roles:
       if str(ctx.channel_id) not in "582646964466745364":
-        eph = True
-    await ctx.send("Current teams:\n\n" + str('\n'.join(names1)), allowed_mentions={"parse": []}, ephemeral=eph)
+        ephemeral = True
+    await ctx.send("Current teams:\n\n" + str('\n'.join(names1)), allowed_mentions={"parse": []}, ephemeral=ephemeral)
     names1.clear()
 
   @interactions.extension_listener()
