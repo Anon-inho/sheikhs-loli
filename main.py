@@ -1,7 +1,7 @@
 import interactions
 
 bot = interactions.Client(
-    token="MTAwMDk2NTYxOTUzMDg2Njc2MA.G1HVv8.V4T_NzW_1HcHO8C3KPl5eX2bI9euRxO1cYbR0w",
+    token="MTAwMDk2NTYxOTUzMDg2Njc2MA.Gcu5_g.vXh6DNg0lGxheJsMSsI6VoKgcBt89IMgbw9Gjw",
     intents=interactions.Intents.ALL)
 
 bot.load("scheduling")
