@@ -10,6 +10,7 @@ bot.load("buttons")
 bot.load("tickets")
 bot.load("inrole")
 bot.load("result")
+bot.load("embed")
 
 @bot.event
 async def on_ready():
