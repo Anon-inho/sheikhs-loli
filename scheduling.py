@@ -1,7 +1,7 @@
 import interactions
 import discord
 
-class cog(interactions.Extension):
+class scheduling(interactions.Extension):
   def __init__(self, bot):
     self.bot: interactions.Client = bot
 
@@ -95,4 +95,4 @@ class cog(interactions.Extension):
     print("scheduling has been loaded")
 
 def setup(bot):
-  cog(bot)
+  scheduling(bot)

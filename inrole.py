@@ -8,7 +8,7 @@ class inrole(interactions.Extension):
   option = [interactions.Option(
     name="ephemeral",
     description="Whether the message will appear to everyone",
-    type=interactions.OptionType.STRING,
+    type=interactions.OptionType.BOOLEAN,
     required=False,
     choices=[
       interactions.Choice(
