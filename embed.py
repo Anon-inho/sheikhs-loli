@@ -34,7 +34,7 @@ class embed(interactions.Extension):
     channelglobal = channel
 
   @interactions.extension_modal("modal")
-  async def modal (self, ctx: interactions.CommandContext, one, two, three, four):
+  async def modal(self, ctx: interactions.CommandContext, one, two, three, four):
     readableHex = int(hex(int(four.replace("#", ""), 16)), 0)
     embed = Embed(title=one, description=two, color=readableHex)
     embed.set_footer(three)

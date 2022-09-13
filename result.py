@@ -226,7 +226,7 @@ class result(interactions.Extension):
     result.menu2array.clear()
   
   @interactions.extension_component(buttons.resultcancel.custom_id)
-  async def resultconfirm_response(self, ctx: interactions.CommandContext):
+  async def resultcancel_response(self, ctx: interactions.CommandContext):
     await ctx.edit(components=[])
     await ctx.send("Match result cancelled!", ephemeral=True, allowed_mentions={"parse": []})
     result.menu1array.clear()

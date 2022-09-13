@@ -111,7 +111,6 @@ class tickets(interactions.Extension):
     staffchannel = discord.utils.find(lambda r: r.id == 704606362218266664, ctx.guild.channels)
     await staffchannel.send(f"{ctx.author.mention} has deleted all finished tickets!")
 
-
   @interactions.extension_component(buttons.ticketdelcancel.custom_id)
   async def delcancelbutton_response(self, ctx: interactions.CommandContext):
     await ctx.edit(components=[])
