@@ -103,8 +103,9 @@ class tickets(interactions.Extension):
 
   @interactions.extension_component(buttons.ticketdelconfirm.custom_id)
   async def delconfirmbutton_response(self, ctx: interactions.CommandContext):
+    channel = await ctx.guild.get_all_channels()
     for channel in list(ctx.guild.channels):
-      if channel.parent_id == 962455110150144100 or 1007090636274552842:
+      if str(channel.parent_id) in ["962455110150144100", "1007090636274552842"]:
         await channel.delete()
     await ctx.edit(components=[])
     await ctx.send(":white_check_mark: Done deleting all finished tickets!", ephemeral=True)
