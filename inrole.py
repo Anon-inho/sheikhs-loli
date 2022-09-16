@@ -8,7 +8,26 @@ class inrole(interactions.Extension):
   option = [interactions.Option(
     name="ephemeral",
     description="Whether the message will appear to everyone",
-    type=interactions.OptionType.BOOLEAN,
+    type=interactions.OptionType.STRING,
+    required=False,
+    choices=[
+      interactions.Choice(
+        name="True",
+        value="True"),
+      interactions.Choice(
+      name="False",
+      value="False")])]
+
+  option2 = [
+    interactions.Option(
+        name="role",
+        description="Role to inrole",
+        type=interactions.OptionType.ROLE,
+        required=True),
+    interactions.Option(
+    name="ephemeral",
+    description="Whether the message will appear to everyone",
+    type=interactions.OptionType.STRING,
     required=False,
     choices=[
       interactions.Choice(
@@ -42,24 +61,7 @@ class inrole(interactions.Extension):
             name="role",
             description="Role to inrole",
             type=interactions.OptionType.SUB_COMMAND,
-            options=[
-              interactions.Option(
-                name="role",
-                description="Role to inrole",
-                type=interactions.OptionType.ROLE,
-                required=True),
-              interactions.Option(
-                name="ephemeral",
-                description="Whether the message will appear to everyone",
-                type=interactions.OptionType.BOOLEAN,
-                required=False,
-                choices=[
-                  interactions.Choice(
-                    name="True",
-                    value="True"),
-                  interactions.Choice(
-                    name="False",
-                    value="False")])])])
+            options=option2)])
   async def inrole(self, ctx: interactions.CommandContext, sub_command: str, role: str = None, ephemeral: str = None):
     Staff = discord.utils.find(lambda r: r.id == 582646886696091669, ctx.guild.roles)
     if ephemeral == "False":
