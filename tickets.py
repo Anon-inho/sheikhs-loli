@@ -117,7 +117,7 @@ class tickets(interactions.Extension):
     await ctx.edit(components=[])
     await ctx.send(":white_check_mark: Action cancelled!", ephemeral=True)
 
-  @interactions.extension_listener
+  @interactions.extension_listener()
   async def on_message_create(self, ctx: interactions.Message):
     if ctx.author.id == 1000965619530866760:
       return
