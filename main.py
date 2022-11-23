@@ -1,7 +1,12 @@
 import interactions
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
 bot = interactions.Client(
-    token="MTAwMDk2NTYxOTUzMDg2Njc2MA.Gcu5_g.vXh6DNg0lGxheJsMSsI6VoKgcBt89IMgbw9Gjw",
+    token=str(DISCORD_TOKEN),
     intents=interactions.Intents.ALL)
 
 bot.load("scheduling")
@@ -12,6 +17,8 @@ bot.load("inrole")
 bot.load("result")
 bot.load("embed")
 bot.load("create")
+# bot.load("raid")
+# bot.load("docs")
 
 @bot.event
 async def on_ready():

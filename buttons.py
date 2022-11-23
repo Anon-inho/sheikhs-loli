@@ -55,6 +55,11 @@ class buttons(interactions.Extension):
   label="Cancel",
   custom_id="resultcancel")
 
+  rules = Button(
+    style=ButtonStyle.LINK,
+    label="Rules Document",
+    url="https://docs.google.com/document/d/1MVyynGQ0xiANmAQtohcPDEH710UrrgTNzn8oEhmgr3k/edit?usp=sharing")
+
   @interactions.extension_listener()
   async def on_ready(penis):
     print("buttons has been loaded")
