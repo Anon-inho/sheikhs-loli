@@ -54,7 +54,7 @@ class scheduling(interactions.Extension):
     await ctx.get_guild()
     if sub_command == "team":
       category = 1001966433372213409
-      TeamCaptain = discord.utils.find(lambda r: r.id == 694367677262725212, ctx.guild.roles)
+      TeamCaptain = discord.utils.find(lambda r: r.id == 1045752403951104030, ctx.guild.roles)
       teamrolesrole = discord.utils.find(lambda r: r.id == int(799846260026769449), ctx.guild.roles)
       teams = "4v4, 4v3 or 3v3"
     if sub_command == "trio":

@@ -30,7 +30,7 @@ class confirm(interactions.Extension):
             type=interactions.OptionType.SUB_COMMAND)])
   async def confirm(self, ctx: interactions.CommandContext, sub_command: str):
     if sub_command == "team":
-      captainid = 694367677262725212
+      captainid = 1045752403951104030
       category = 1001966433372213409
       placeholder = "4v4"
     if sub_command == "trio":
@@ -91,7 +91,7 @@ class confirm(interactions.Extension):
   async def modal_response(self, ctx: interactions.CommandContext, one, two, three):
     await ctx.get_channel()
     await ctx.send(f"{ctx.author.mention} has proposed a schedule!\n\n**Match date**: {one}\n**Match time**: {two}\n**Team size**: {three}", components=[buttons.tcconfirm, buttons.tcdeny])
-    await ctx.channel.send("<@&694367677262725212>", allowed_mentions={"parse": ["roles", "users"]})
+    await ctx.channel.send("<@&1045752403951104030>", allowed_mentions={"parse": ["roles", "users"]})
     firsttc = ctx.author
     global one1global
     global two1global

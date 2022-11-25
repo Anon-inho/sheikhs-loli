@@ -72,7 +72,7 @@ class result(interactions.Extension):
     options1.clear()
     options2.clear()
     if sub_command == "team":
-      tc = 694367677262725212
+      tc = 1045752403951104030
       tcrole = 799846260026769449
       array1 = ["0", "1", "2"]
       simple = "3"
@@ -99,7 +99,7 @@ class result(interactions.Extension):
       var2 = 2
       error = "duo"
     elif sub_command == "other":
-      teamroles = discord.utils.find(lambda r: r.id == 694367677262725212, ctx.guild.roles)
+      teamroles = discord.utils.find(lambda r: r.id == 1045752403951104030, ctx.guild.roles)
       otheroles = discord.utils.find(lambda r: r.id == 695116170973675540, ctx.guild.roles)
       if str(winners.id) in str([799846260026769449, 799846360546541589, 702755046387089458, 703375168801734786]):
         await ctx.send(":x: You may only this with team/trio/duo roles!", ephemeral=True)
@@ -113,7 +113,7 @@ class result(interactions.Extension):
       if not teamroles.position > losers.position > otheroles.position:
         await ctx.send(":x: You may only this with team/trio/duo roles!", ephemeral=True)
         return
-      if ("694367677262725212" in str(ctx.author.roles)) or ("799846360546541589" in str(ctx.author.roles)) or ("694367677262725212" in str(ctx.author.roles)):
+      if ("1045752403951104030" in str(ctx.author.roles)) or ("799846360546541589" in str(ctx.author.roles)) or ("1045752403951104030" in str(ctx.author.roles)):
         if str(winners.id) not in ["799846260026769449", "799846360546541589", "702755046387089458", "703375168801734786"]:
           if str(losers.id) not in ["799846260026769449", "799846360546541589", "702755046387089458", "703375168801734786"]:
             if teamroles.position > winners.position > otheroles.position:
@@ -121,7 +121,7 @@ class result(interactions.Extension):
                 resultschannel = discord.utils.find(lambda r: r.id == 881696478052089896, ctx.guild.channels)
                 await resultschannel.send(f"**{winners.mention} ({winners.name}): Winners**\n**{losers.mention} ({losers.name}): Losers**\n\n*{type} win*", allowed_mentions={"parse": []})
                 return
-      if not ("694367677262725212" in str(ctx.author.roles)) or ("799846360546541589" in str(ctx.author.roles)) or ("694367677262725212" in str(ctx.author.roles)):
+      if not ("1045752403951104030" in str(ctx.author.roles)) or ("799846360546541589" in str(ctx.author.roles)) or ("1045752403951104030" in str(ctx.author.roles)):
         await ctx.send(":x: You are not a team/trio/duo captain!", ephemeral=True)
         return
     TeamCaptain = discord.utils.find(lambda r: r.id == int(tc), ctx.guild.roles)

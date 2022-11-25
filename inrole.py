@@ -67,7 +67,7 @@ class inrole(interactions.Extension):
     if ephemeral == "False":
       ephemeral = False
     if sub_command == "teams":
-      tc = 694367677262725212
+      tc = 1045752403951104030
       tcrole = 799846260026769449
     if sub_command == "trios":
       tc = 799846360546541589
