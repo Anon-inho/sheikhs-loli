@@ -60,6 +60,16 @@ class buttons(interactions.Extension):
     label="Rules Document",
     url="https://docs.google.com/document/d/1MVyynGQ0xiANmAQtohcPDEH710UrrgTNzn8oEhmgr3k/edit?usp=sharing")
 
+  roledelconfirm = Button(
+  style=ButtonStyle.SUCCESS,
+  label="Confirm",
+  custom_id="roledelconfirm")
+
+  roledelcancel = Button(
+  style=ButtonStyle.DANGER,
+  label="Cancel",
+  custom_id="roledelcancel")
+
   @interactions.extension_listener()
   async def on_ready(penis):
     print("buttons has been loaded")

@@ -12,8 +12,9 @@ class embed(interactions.Extension):
       components=[
         interactions.TextInput(custom_id="1", style=interactions.TextStyleType.SHORT, label="Title", placeholder="Title", required=False), 
         interactions.TextInput(custom_id="2", style=interactions.TextStyleType.PARAGRAPH, label="Description", placeholder="Description", required=True),
-        interactions.TextInput(custom_id="3", style=interactions.TextStyleType.SHORT, label= "Footer", placeholder="Footer", required=False),
-        interactions.TextInput(custom_id="4", style=interactions.TextStyleType.SHORT, label="Color", placeholder="Color in hex (Ex: 123456)", required=True)])
+        interactions.TextInput(custom_id="3", style=interactions.TextStyleType.SHORT, label="Color", placeholder="Color in hex (Ex: 123456)", required=True),
+        interactions.TextInput(custom_id="4", style=interactions.TextStyleType.SHORT, label= "Footer", placeholder="Footer", required=False),
+        interactions.TextInput(custom_id="5", style=interactions.TextStyleType.SHORT, label= "Footer Image", placeholder="Image URL", required=False)])
 
   @interactions.extension_command(
     name="embed",
@@ -34,10 +35,10 @@ class embed(interactions.Extension):
     channelglobal = channel
 
   @interactions.extension_modal("modal")
-  async def modal(self, ctx: interactions.CommandContext, one, two, three, four):
-    readableHex = int(hex(int(four.replace("#", ""), 16)), 0)
+  async def modal(self, ctx: interactions.CommandContext, one, two, three, four, five):
+    readableHex = int(hex(int(three.replace("#", ""), 16)), 0)
     embed = Embed(title=one, description=two, color=readableHex)
-    embed.set_footer(three)
+    embed.set_footer(text=four, icon_url=str(five))
     channel = discord.utils.find(lambda r: r.id == channelglobal.id, ctx.guild.channels)
     await channel.send(embeds=embed)
     await ctx.send(f":white_check_mark: Embed sent to {channelglobal.mention}", ephemeral=True)

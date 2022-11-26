@@ -7,25 +7,11 @@ class tickets(interactions.Extension):
   def __init__(self, bot):
     self.bot: interactions.Client = bot
 
-  @interactions.extension_command(
-    name="ticketgui",
-    description="creates a ticketgui",
-    default_member_permissions=interactions.Permissions.MANAGE_CHANNELS,
-    scope=582644566641999874,
-    options=[
-        interactions.Option(
-        name="channel",
-        description="gui channel",
-        type=interactions.OptionType.CHANNEL,
-        required=True)])
-  async def ticketgui(self, channel):
-    await channel.send("Click the button below to create a ticket!\n\nTickets can be used to ask questions directly to staff or to create/join a team during a tournament registration period", components=buttons.ticket)
-
   ticketmodal = interactions.Modal(
     title="Ticket reason",
     custom_id="ticketmodal",
     components=[
-      interactions.TextInput(custom_id="7", style=interactions.TextStyleType.PARAGRAPH, label="Ticket reason", placeholder="Ex: Creating a duo for tournament")])
+      interactions.TextInput(custom_id="7", style=interactions.TextStyleType.PARAGRAPH, label="Ticket reason", placeholder="Ex: Creating a duo for tournament", min_length=1, max_length=200)])
 
   @interactions.extension_command(
     name="ticket",
@@ -59,7 +45,13 @@ class tickets(interactions.Extension):
       if "582646886696091669" not in str(ctx.author.roles):
         await ctx.send(":x: You are not a <@&582646886696091669>", ephemeral=True)
         return
-      await channel.send("Click the button below to create a ticket!\n\nTickets can be used to ask questions directly to staff or to create/join a team during a tournament registration period", components=buttons.ticket)
+      embed = interactions.Embed(
+      title="Create a ticket",
+      description="Tickets can be used to ask questions directly to staff or to create/join a team during a tournament registration period",
+      color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
+      embed.set_footer(text="United Corporation Governance Tournaments", icon_url="https://cdn.discordapp.com/icons/582644566641999874/565572bdb6c2c4cc6311f44623ef65a1.png")
+      await channel.send(embeds=embed, components=buttons.ticket)
+      await ctx.send(f":white_check_mark: Done! Send a ticket GUI to {channel.mention}", ephemeral=True)
     if sub_command == "create":
       await ctx.popup(tickets.ticketmodal)
     elif sub_command == "close":

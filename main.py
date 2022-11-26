@@ -17,7 +17,8 @@ bot.load("inrole")
 bot.load("result")
 bot.load("embed")
 bot.load("create")
-# bot.load("raid")
+bot.load("randomfile")
+bot.load("roles")
 # bot.load("docs")
 
 @bot.event

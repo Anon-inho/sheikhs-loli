@@ -67,7 +67,7 @@ class create(interactions.Extension):
 
   @interactions.extension_listener()
   async def on_ready(penis):
-    print("embed has been loaded") 
+    print("create has been loaded") 
 
 def setup(bot):
   create(bot)
