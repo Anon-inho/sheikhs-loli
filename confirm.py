@@ -120,7 +120,7 @@ class confirm(interactions.Extension):
     TeamCaptain = discord.utils.find(lambda r: r.id == str(captainidglobal), ctx.guild.roles)
     if TeamCaptain.id in ctx.author.roles:
         await ctx.edit(components=[])
-        await ctx.send(f"{TeamCaptain.mention} has cancelled the proposed scheduling")
+        await ctx.send(f"{ctx.author.mention} has cancelled the proposed scheduling")
     if TeamCaptain.id not in ctx.author.roles:
         await ctx.send(f":x: You are not a {TeamCaptain.mention}", ephemeral=True)
 
