@@ -63,7 +63,7 @@ class create(interactions.Extension):
     if globalcaptain != None:
       await ctx.guild.add_member_role(role=roleposition, member_id=globalcaptain.id)
       await ctx.guild.add_member_role(role=role, member_id=globalcaptain.id)
-    await ctx.send(f":white_check_mark: Done! Created {role.mention}")
+    await ctx.send(f":white_check_mark: Done! Created {role.mention}", ephemeral=True)
 
   @interactions.extension_listener()
   async def on_ready(penis):

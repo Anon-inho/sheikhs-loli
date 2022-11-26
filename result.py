@@ -67,6 +67,9 @@ class result(interactions.Extension):
                             name="Scheduling",
                             value="Scheduling")])])])
   async def result(self, ctx: interactions.CommandContext, sub_command: str, winners: str = None, losers: str = None, type: str = None):
+    if winners.id not in ctx.author.roles and losers.id not in ctx.author.roles:
+      await ctx.send(f":x: You must be in one of the participating {sub_command}s to report a match result!", ephemeral=True)
+      return
     options1 = []
     options2 = []
     options1.clear()
@@ -213,7 +216,12 @@ class result(interactions.Extension):
         await message2global.delete()
         result1 = ''.join(''.join(o) for o in result.menu1array)
         result2 = ''.join(''.join(p) for p in result.menu2array)
-        await ctx.send(f"**Please check if the match result is correct:**\n:bulb: Tip: if this isn't correct, click the `Cancel` button and try again! Otherwise, click `Confirm`\n\n**{winnersglobal.mention} ({winnersglobal.name})**\n{str(result1)}\n\n**{losersglobal.mention} ({losersglobal.name})**\n{str(result2)}\n\n**{winnersglobal.mention} ({winnersglobal.name}): Winners**\n**{losersglobal.mention} ({losersglobal.name}): Losers**", components=[buttons.resultconfirm, buttons.resultcancel], ephemeral=True, allowed_mentions={"parse": []})
+        embed = interactions.Embed(
+          title="Match Result",
+          description=f"**{winnersglobal.name}**\n{str(result1)}\n\n**{losersglobal.name}**\n{str(result2)}\n\n**Winners: {winnersglobal.name}**\n**Losers: {losersglobal.name}**",
+          color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
+        embed.set_footer(text="United Corporation Governance Tournaments", icon_url="https://cdn.discordapp.com/icons/582644566641999874/565572bdb6c2c4cc6311f44623ef65a1.png")
+        await ctx.send(f"**Please check if the match result is correct:**\n:bulb: Tip: if this isn't correct, click the `Cancel` button and try again! Otherwise, click `Confirm`", embeds=embed, components=[buttons.resultconfirm, buttons.resultcancel], ephemeral=True)
 
   @interactions.extension_component(buttons.resultconfirm.custom_id)
   async def resultconfirm_response(self, ctx: interactions.CommandContext):
@@ -221,7 +229,12 @@ class result(interactions.Extension):
     await ctx.edit(components=[])
     result1 = ''.join(''.join(o) for o in result.menu1array)
     result2 = ''.join(''.join(p) for p in result.menu2array)
-    await resultschannel.send(f"**{winnersglobal.mention} ({winnersglobal.name})**\n{str(result1)}\n\n**{losersglobal.mention} ({losersglobal.name})**\n{str(result2)}\n\n**{winnersglobal.mention} ({winnersglobal.name}): Winners**\n**{losersglobal.mention} ({losersglobal.name}): Losers**", allowed_mentions={"parse": []})
+    embed = interactions.Embed(
+      title="Match Result",
+      description=f"**{winnersglobal.name}**\n{str(result1)}\n\n**{losersglobal.name}**\n{str(result2)}\n\n**Winners: {winnersglobal.name}**\n**Losers: {losersglobal.name}**",
+      color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
+    embed.set_footer(text="United Corporation Governance Tournaments", icon_url="https://cdn.discordapp.com/icons/582644566641999874/565572bdb6c2c4cc6311f44623ef65a1.png")
+    await resultschannel.send(embeds=embed)
     result.menu1array.clear()
     result.menu2array.clear()
   
