@@ -75,6 +75,10 @@ class confirm(interactions.Extension):
         await ctx.send(f":x: You must be in a {sub_command} scheduling channel to send this command!", ephemeral=True)
     if TeamCaptain.id not in ctx.author.roles:
         await ctx.send(f":x: You are not a {TeamCaptain.mention}", ephemeral=True)
+    global globalsubcommand
+    global globalcaptainid
+    globalcaptainid = captainid
+    globalsubcommand = sub_command
 
   @interactions.extension_modal("staffmodal")
   async def staffmodal_response(self, ctx: interactions.CommandContext, one, two, three, four):
@@ -88,8 +92,8 @@ class confirm(interactions.Extension):
   @interactions.extension_modal("teamconfirm")
   async def modal_response(self, ctx: interactions.CommandContext, one, two, three):
     await ctx.get_channel()
-    await ctx.send(f"{ctx.author.mention} has proposed a schedule!\n\n**Match date:** {one}\n**Match time:** {two}\n**Team size:** {three}", components=[buttons.tcconfirm, buttons.tcdeny])
-    await ctx.channel.send("<@&1045752403951104030>", allowed_mentions={"parse": ["roles", "users"]})
+    await ctx.send(f"{ctx.author.mention} has proposed a schedule!\n\n**Match date:** {one}\n**Match time:** {two}\n**{globalsubcommand.capitalize()} size:** {three}", components=[buttons.tcconfirm, buttons.tcdeny])
+    await ctx.channel.send(f"<@&{globalcaptainid}>", allowed_mentions={"parse": ["roles", "users"]})
 
   @interactions.extension_component(buttons.tcconfirm.custom_id)
   async def tc_button_response(self, ctx: interactions.CommandContext):
@@ -105,16 +109,15 @@ class confirm(interactions.Extension):
       captainid = 799846360546541589
     if tuple[0] == "Duo":
       captainid = 703375168801734786
-    TeamCaptain = discord.utils.find(lambda r: r.id == str(captainid), ctx.guild.roles)
-    if TeamCaptain.id in ctx.author.roles:
+    if captainid in ctx.author.roles:
       if str(array[0].replace("<@!", "").replace(">", "")) not in str(ctx.author.id):
         await ctx.edit(components=[])
         await ctx.get_channel()
-        await ctx.channel.send(f"Both {tuple[0]} Captains have confirmed the match!\n\n**Match date:** {array[1]}\n**Match time:** {array[2]}\n**Team size:** {fuck}\n\n<@&582646886696091669>, please confirm the match by clicking the button below", components=[buttons.staffconfirm, buttons.staffdeny], allowed_mentions={"parse": ["roles", "users"]})
-    if TeamCaptain.id not in ctx.author.roles:
-      await ctx.send(f":x: You are not a {TeamCaptain.mention}", ephemeral=True)
+        await ctx.channel.send(f"Both {tuple[0]} Captains have confirmed the match!\n\n**Match date:** {array[1]}\n**Match time:** {array[2]}\n**{tuple[0]} size:** {fuck}\n\n<@&582646886696091669>, please confirm the match by clicking the button below", components=[buttons.staffconfirm, buttons.staffdeny], allowed_mentions={"parse": ["roles", "users"]})
+    if captainid not in ctx.author.roles:
+      await ctx.send(f":x: You are not a <@&{captainid}>", ephemeral=True)
     if str(array[0].replace("<@!", "").replace(">", "")) in str(ctx.author.id):
-      await ctx.send(f":x: The other {TeamCaptain.mention} needs to confirm the match", ephemeral=True)
+      await ctx.send(f":x: The other <@&{captainid}> needs to confirm the match", ephemeral=True)
 
   @interactions.extension_component(buttons.tcdeny.custom_id)
   async def team_deny_response(self, ctx: interactions.CommandContext):
@@ -149,12 +152,12 @@ class confirm(interactions.Extension):
     Staff = discord.utils.find(lambda r: r.id == 582646886696091669, ctx.guild.roles)
     if Staff.id in ctx.author.roles:
         await ctx.edit(components=[])
-        confirmed = await ctx.send(f"{tuple[0]} match confirmed!\n\n**Match date:** {array[0]}\n**Match time:** {array[1]}\n**Team size:** {fuck}")
+        confirmed = await ctx.send(f"{tuple[0]} match confirmed!\n\n**Match date:** {array[0]}\n**Match time:** {array[1]}\n**{tuple[0]} size:** {fuck}")
         await ctx.channel.pin_message(confirmed)
         schannel = ctx.channel.id
         nchannel = ctx.channel.name
         staffchannel = discord.utils.find(lambda r: r.id == 1003135348236353576, ctx.guild.channels)
-        await staffchannel.send(f"{tuple[0]} match confirmed by {ctx.author.mention}\n{nchannel} (<#{schannel}>)\n\n**Match date:** {array[0]}\n**Match time:** {array[1]}\n**Team size:** {fuck}")
+        await staffchannel.send(f"{tuple[0]} match confirmed by {ctx.author.mention}\n{nchannel} (<#{schannel}>)\n\n**Match date:** {array[0]}\n**Match time:** {array[1]}\n**{tuple[0]} size:** {fuck}")
     if Staff.id not in ctx.author.roles:
         await ctx.send(f":x: You are not a {Staff.mention}", ephemeral=True)
 

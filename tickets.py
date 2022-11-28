@@ -82,6 +82,7 @@ class tickets(interactions.Extension):
             interactions.Overwrite(id=str(582644566641999874), type=0, deny=interactions.Permissions.VIEW_CHANNEL)])
     ticketmessage = await ticketchannel.send(f"Thanks for creating a ticket, {ctx.author.mention}\n\nTicket reason: **{one}**\n\nPlease do not ping any staff members, we will get back to you as soon as possible", components=buttons.ticketclose)
     await ticketchannel.pin_message(ticketmessage)
+    await ticketchannel.send("Pssst! Trying to create/join a team/trio/duo? Type `/request` and check out the commands (read their name and description)")
     await ctx.send(f"Ticket created: {ticketchannel.mention}", ephemeral=True)
 
   @interactions.extension_component(buttons.ticketclose.custom_id)

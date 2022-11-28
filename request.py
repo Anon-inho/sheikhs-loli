@@ -19,15 +19,15 @@ class request(interactions.Extension):
         options=[
           interactions.Option(
             name="team",
-            description="Requests the reactions of a team",
+            description="Requests the creation of a team",
             type=interactions.OptionType.SUB_COMMAND),
           interactions.Option(
             name="trio",
-            description="Requests the reactions of a trio",
+            description="Requests the creation of a trio",
             type=interactions.OptionType.SUB_COMMAND),
           interactions.Option(
             name="duo",
-            description="Requests the reactions of a duo",
+            description="Requests the creation of a duo",
             type=interactions.OptionType.SUB_COMMAND)]),
         interactions.Option(
           name="join",
