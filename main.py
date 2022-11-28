@@ -19,6 +19,7 @@ bot.load("embed")
 bot.load("create")
 bot.load("randomfile")
 bot.load("roles")
+bot.load("request")
 # bot.load("docs")
 
 @bot.event

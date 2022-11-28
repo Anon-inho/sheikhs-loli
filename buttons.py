@@ -70,6 +70,26 @@ class buttons(interactions.Extension):
   label="Cancel",
   custom_id="roledelcancel")
 
+  requestcreateapprove = Button(
+    style=ButtonStyle.SUCCESS,
+    label="Approve",
+    custom_id="requestcreateapprove")
+
+  requestcreatedeny = Button(
+    style=ButtonStyle.DANGER,
+    label="Deny",
+    custom_id="requestcreatedeny")
+
+  requestjoinapprove = Button(
+    style=ButtonStyle.SUCCESS,
+    label="Approve",
+    custom_id="requestjoinapprove")
+
+  requestjoindeny = Button(
+    style=ButtonStyle.DANGER,
+    label="Deny",
+    custom_id="requestjoindeny")
+
   @interactions.extension_listener()
   async def on_ready(penis):
     print("buttons has been loaded")
