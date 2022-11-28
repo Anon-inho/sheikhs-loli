@@ -1,5 +1,6 @@
 import interactions
 import discord
+from interactions import Embed
 
 class inrole(interactions.Extension):
   def __init__(self, bot):
@@ -93,7 +94,11 @@ class inrole(interactions.Extension):
           for member in list(ctx.guild.members):
               if str(role.id) in str(member.roles):
                   names.append(f"{member.mention} ({member.name})")
-      await ctx.send(f"Members in {role.mention}:\n\n" + str('\n'.join(names)), allowed_mentions={"parse": []}, ephemeral=ephemeral)
+      embed1 = Embed(
+        title=f'Members in "{role.name}":',
+        description=str('\n'.join(names)),
+        color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
+      await ctx.send(embeds=embed1, ephemeral=ephemeral)
       return
     await ctx.guild.get_all_roles()
     teamcaptainrole = discord.utils.find(lambda r: r.id == int(tc), ctx.guild.roles)
@@ -106,7 +111,11 @@ class inrole(interactions.Extension):
     if Staff.id not in ctx.author.roles:
       if str(ctx.channel_id) not in "582646964466745364":
         ephemeral = True
-    await ctx.send("Current teams:\n\n" + str('\n'.join(names1)), allowed_mentions={"parse": []}, ephemeral=ephemeral)
+    embed2 = Embed(
+      title=f"Current {sub_command}:",
+      description=str('\n'.join(names1)),
+      color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
+    await ctx.send(embeds=embed2, ephemeral=ephemeral)
     names1.clear()
 
   @interactions.extension_listener()
