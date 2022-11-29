@@ -20,6 +20,7 @@ bot.load("create")
 bot.load("randomfile")
 bot.load("roles")
 bot.load("request")
+bot.load("recruitment")
 # bot.load("docs")
 
 @bot.event
