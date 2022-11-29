@@ -90,6 +90,16 @@ class buttons(interactions.Extension):
     label="Deny",
     custom_id="requestjoindeny")
 
+  requesttagapprove = Button(
+    style=ButtonStyle.SUCCESS,
+    label="Approve",
+    custom_id="requesttagapprove")
+
+  requesttagdeny = Button(
+    style=ButtonStyle.DANGER,
+    label="Deny",
+    custom_id="requesttagdeny")
+
   @interactions.extension_listener()
   async def on_ready(penis):
     print("buttons has been loaded")

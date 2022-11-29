@@ -27,7 +27,7 @@ class recruitment(interactions.Extension):
         components=[
           interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"Creating a [team/trio]duo]", placeholder="Ex: Trio", custom_id="1"),
           interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"What's the rating needed to join?", placeholder="Ex: 2826", custom_id="2"),
-          interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"What are the strenghts needed to join?", placeholder="Ex: Aiming", custom_id="3"),
+          interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"What are the strengths needed to join?", placeholder="Ex: Aiming", custom_id="3"),
           interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"What availability should people have to join?", placeholder="Ex: 2 PM - 10 PM EST", custom_id="4")])
     if sub_command == "join":
       modal = Modal(
@@ -36,7 +36,7 @@ class recruitment(interactions.Extension):
         components=[
           interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"Joining a [team/trio/duo]", placeholder="Ex: Trio", custom_id="1"),
           interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"What's your rating?", placeholder="Ex: 2826", custom_id="2"),
-          interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"What are your strenghts?", placeholder="Ex: Aiming", custom_id="3"),
+          interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"What are your strengths?", placeholder="Ex: Aiming", custom_id="3"),
           interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"What about your weaknesses?", placeholder="Ex: Sky basing", custom_id="4"),
           interactions.TextInput(style=interactions.TextStyleType.SHORT, label=f"What your availiability?", placeholder="Ex: 2 PM - 10 PM EST", custom_id="5")])
     await ctx.popup(modal)
@@ -48,12 +48,12 @@ class recruitment(interactions.Extension):
     if five == None:
       embed = Embed(
         title=ctx.author.name,
-        description=f"**Looking to:** {globalsubcommand} a {one}\n**Rating needed to join:** {two}\n**Strenghts needed to join:** {three}\n**Recommended availability:** {four}",
+        description=f"**Looking to:** {globalsubcommand} a {one}\n**Rating needed to join:** {two}\n**Strengths needed to join:** {three}\n**Recommended availability:** {four}",
         color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
     if five != None:
       embed = Embed(
         title=ctx.author.name,
-        description=f"**Looking to:** {globalsubcommand} a {one}\n**Rating:** {two}\n**Strenghts:** {three}\n**Weaknesses:** {four}\n**Availability:** {five}",
+        description=f"**Looking to:** {globalsubcommand} a {one}\n**Rating:** {two}\n**Strengths:** {three}\n**Weaknesses:** {four}\n**Availability:** {five}",
         color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
     recruitmentchannel = discord.utils.find(lambda r: r.id == 888161164654170143, ctx.guild.channels)
     await recruitmentchannel.send(content="Type `/recruitment` in any channel to send a message here", embeds=embed)
