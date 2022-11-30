@@ -13,7 +13,7 @@ class tag(interactions.Extension):
     description="requests a tag for your name; example: [ALOT] Anon",
     scope=582644566641999874)
   async def tag(self, ctx: interactions.CommandContext):
-    f = open(os.getcwd() + "\\blacklists\\tagblacklist.txt", "r")
+    f = open("tagblacklist.txt", "r")
     new = str(f.read()).rsplit("\n")
     if str(ctx.author.id) in new:
       await ctx.send(f":x: You are blacklisted from requesting tags", ephemeral=True)

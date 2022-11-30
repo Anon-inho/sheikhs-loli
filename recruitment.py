@@ -21,7 +21,7 @@ class recruitment(interactions.Extension):
         description="Use this if you are trying to join a team/trio/duo",
         type=interactions.OptionType.SUB_COMMAND)])
   async def recruitment(self, ctx: interactions.CommandContext, sub_command):
-    f = open(os.getcwd() + "\\blacklists\\recruitmentblacklist.txt", "r")
+    f = open("recruitmentblacklist.txt", "r")
     new = str(f.read()).rsplit("\n")
     if str(ctx.author.id) in new:
       await ctx.send(f":x: You are blacklisted from posting a recruitment", ephemeral=True)
