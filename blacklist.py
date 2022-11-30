@@ -6,7 +6,7 @@ class blacklist(interactions.Extension):
     self.bot: interactions.Client = bot
 
   choice = []
-  for item in os.listdir(os.getcwd() + "\\..\\blacklists"):
+  for item in os.listdir(os.getcwd() + "\\\\\\\\blacklists"):
     choice.append(
       interactions.Choice(
         name=item.replace("blacklist.txt", "").capitalize(),
@@ -62,7 +62,7 @@ class blacklist(interactions.Extension):
             required=True,
             choices=choice)])])
   async def tagblacklist(self, ctx: interactions.CommandContext, sub_command, member: str = None, name: str = None):
-    f = open(os.getcwd() + f"\\..\\blacklists\\{name}blacklist.txt", "r")
+    f = open(os.getcwd() + f"\\blacklists\\{name}blacklist.txt", "r")
     new = str(f.read()).rsplit("\n")
     if sub_command == "add":
       if str(member.id) in new:
@@ -70,7 +70,7 @@ class blacklist(interactions.Extension):
         f.close()
         return
       if str(member.id) not in new:
-        b = open(os.getcwd() + f"\\..\\blacklists\\{name}blacklist.txt", "a")
+        b = open(os.getcwd() + f"\\blacklists\\{name}blacklist.txt", "a")
         b.writelines([str(member.id), "\n"])
         await ctx.send(f":white_check_mark: Done! Added {member.mention} to the {name} blacklist!", ephemeral=True)
     if sub_command == "remove":
@@ -78,9 +78,9 @@ class blacklist(interactions.Extension):
         await ctx.send(f":x: Error! {member.mention} is not blacklisted from {name}s!", ephemeral=True)
         return
       if str(member.id) in new:
-        with open(os.getcwd() + f"\\..\\blacklists\\{name}blacklist.txt", "r") as f:
+        with open(os.getcwd() + f"\\blacklists\\{name}blacklist.txt", "r") as f:
           lines = f.readlines()
-        with open(os.getcwd() + f"\\..\\blacklists\\{name}blacklist.txt", "w") as f:
+        with open(os.getcwd() + f"\\blacklists\\{name}blacklist.txt", "w") as f:
           for line in lines:
             if line.strip("\n") != str(member.id):
               f.write(line)
