@@ -2,6 +2,7 @@ import interactions
 from interactions import Modal
 import discord
 from buttons import buttons
+import os
 
 class tag(interactions.Extension):
   def __init__(self, bot):
@@ -12,19 +13,24 @@ class tag(interactions.Extension):
     description="requests a tag for your name; example: [ALOT] Anon",
     scope=582644566641999874)
   async def tag(self, ctx: interactions.CommandContext):
-    f = open("tagblacklist.txt", "r")
+    f = open(os.getcwd() + "\\..\\blacklists\\tagblacklist.txt", "r")
     new = str(f.read()).rsplit("\n")
     if str(ctx.author.id) in new:
       await ctx.send(f":x: You are blacklisted from requesting tags", ephemeral=True)
       f.close()
       return
     if str(ctx.author.id) not in new:
-      modal = Modal(
-        title="Tag request",
-        custom_id="tag",
-        components=[
-          interactions.TextInput(style=interactions.TextStyleType.SHORT, custom_id="1", label=f"Tag", required=True, placeholder="Ex: [ALOT]")])
-      await ctx.popup(modal)
+      thing = int(29-ctx.author.name.__len__())
+      if thing <= 2:
+        await ctx.send(":x: Your nickname is too long to request a tag, please ask for one manually", ephemeral=True)
+        return
+      if thing > 2:
+        modal = Modal(
+          title="Tag request",
+          custom_id="tag",
+          components=[
+            interactions.TextInput(style=interactions.TextStyleType.SHORT, custom_id="1", label=f"Tag", required=True, placeholder="Ex: [ALOT]", max_length=thing)])
+        await ctx.popup(modal)
 
   @interactions.extension_modal("tag")
   async def tag_response(self, ctx: interactions.CommandContext, one):
@@ -70,68 +76,6 @@ class tag(interactions.Extension):
     lobby = discord.utils.find(lambda r: r.id == 582646950403506199, ctx.guild.channels)
     await lobby.send(f":x: {array[0]}, your **tag request** was **denied**")
     await ctx.edit(content=f"{ctx.message.content}\n\n:x: **Denied by {ctx.author.mention}**", components=[])
-
-  @interactions.extension_command(
-    name="tagblacklist",
-    description="blacklists someone from requesting a tag",
-    scope=582644566641999874,
-    default_member_permissions=interactions.Permissions.BAN_MEMBERS,
-    options=[
-      interactions.Option(
-        name="add",
-        description="member to add to the blacklist",
-        type=interactions.OptionType.SUB_COMMAND,
-        options=[
-          interactions.Option(
-            name="member",
-            description="member to add to the blacklist",
-            type=interactions.OptionType.USER,
-            required=True)]),
-      interactions.Option(
-        name="remove",
-        description="member to remove from the blacklist",
-        type=interactions.OptionType.SUB_COMMAND,
-        options=[
-          interactions.Option(
-            name="member",
-            description="member to remove from the blacklist",
-            type=interactions.OptionType.USER,
-            required=True)]),
-      interactions.Option(
-        name="list",
-        description="shows a list of blacklisted people",
-        type=interactions.OptionType.SUB_COMMAND)])
-  async def tagblacklist(self, ctx: interactions.CommandContext, sub_command, member: str = None):
-    f = open("tagblacklist.txt", "r")
-    new = str(f.read()).rsplit("\n")
-    if sub_command == "add":
-      if str(member.id) in new:
-        await ctx.send(f":x: Error! {member.mention} is already blacklisted!", ephemeral=True)
-        f.close()
-        return
-      if str(member.id) not in new:
-        b = open("tagblacklist.txt", "a")
-        b.writelines([str(member.id), "\n"])
-        await ctx.send(f":white_check_mark: Done! Added {member.mention} to the blacklist!", ephemeral=True)
-    if sub_command == "remove":
-      if str(member.id) not in new:
-        await ctx.send(f":x: Error! {member.mention} is not blacklisted!", ephemeral=True)
-        return
-      if str(member.id) in new:
-        with open("tagblacklist.txt", "r") as f:
-          lines = f.readlines()
-        with open("tagblacklist.txt", "w") as f:
-          for line in lines:
-            if line.strip("\n") != str(member.id):
-              f.write(line)
-        await ctx.send(f":white_check_mark: Done! Removed {member.mention} from the blacklist!", ephemeral=True)
-    if sub_command == "list":
-      new.pop()
-      array = []
-      for user in new:
-        array.append(f"<@!{user}>")
-      fuck = "\n".join(array)
-      await ctx.send(f"List of people blacklisted from requesting a tag:\n\n{fuck}", ephemeral=True)
 
   @interactions.extension_listener()
   async def on_ready(penis):
