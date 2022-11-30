@@ -6,7 +6,7 @@ class blacklist(interactions.Extension):
     self.bot: interactions.Client = bot
 
   choice = []
-  for item in os.listdir(os.getcwd() + "\\\\\\\\blacklists"):
+  for item in os.listdir(os.getcwd() + "\\blacklists"):
     choice.append(
       interactions.Choice(
         name=item.replace("blacklist.txt", "").capitalize(),
