@@ -75,8 +75,19 @@ class tickets(interactions.Extension):
 
   @interactions.extension_modal("ticketmodal")
   async def ticketmodal_response(self, ctx: interactions.CommandContext, one):
+    if "[" and "]" in ctx.author.name:
+      n = int(ctx.author.name.count("]"))
+      if n == 1:
+        tuple = str(ctx.author.name).partition("]")
+        channnelname = list(tuple)[2].replace(" ", "", 1)
+      if n > 1:
+        aaa = ctx.author.name.replace("]", "", n-1)
+        tuple = aaa.partition("]")
+        channnelname = list(tuple)[2].replace(" ", "", 1)
+    if "[" and "]" not in ctx.author.name:
+      channnelname = ctx.author.name
     ticketchannel = await ctx.guild.create_channel(
-        f'{ctx.author.name}', interactions.ChannelType.GUILD_TEXT, parent_id=694390326911303723, topic=f"Ticket created by {ctx.author} | (Creator ID: {ctx.author.id})", permission_overwrites=[
+        name=channnelname, type=interactions.ChannelType.GUILD_TEXT, parent_id=694390326911303723, topic=f"Ticket created by {ctx.author} | (Creator ID: {ctx.author.id})", permission_overwrites=[
             interactions.Overwrite(id=str(ctx.author.id), type=1, allow=interactions.Permissions.VIEW_CHANNEL | interactions.Permissions.SEND_MESSAGES | interactions.Permissions.EMBED_LINKS | interactions.Permissions.ATTACH_FILES),
             interactions.Overwrite(id=str(582646886696091669), type=0, allow=interactions.Permissions.VIEW_CHANNEL | interactions.Permissions.SEND_MESSAGES | interactions.Permissions.EMBED_LINKS | interactions.Permissions.ATTACH_FILES | interactions.Permissions.MANAGE_CHANNELS | interactions.Permissions.MANAGE_ROLES | interactions.Permissions.MENTION_EVERYONE),
             interactions.Overwrite(id=str(582644566641999874), type=0, deny=interactions.Permissions.VIEW_CHANNEL)])
