@@ -97,7 +97,7 @@ class inrole(interactions.Extension):
       embed1 = Embed(
         title=f'Members in "{role.name}":',
         description=str('\n'.join(names)),
-        color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
+        color=role.color)
       await ctx.send(embeds=embed1, ephemeral=ephemeral)
       return
     await ctx.guild.get_all_roles()
