@@ -1,7 +1,6 @@
 import interactions
 from interactions import Embed, Modal
 import discord
-import os
 
 class recruitment(interactions.Extension):
   def __init__(self, bot):
@@ -53,15 +52,26 @@ class recruitment(interactions.Extension):
 
   @interactions.extension_modal("recruitment")
   async def recruitment_response(self, ctx: interactions.CommandContext, one, two, three, four, five: str = None):
+    if "[" and "]" in ctx.author.name:
+      n = int(ctx.author.name.count("]"))
+      if n == 1:
+        tuple = str(ctx.author.name).partition("]")
+        embedname = list(tuple)[2].replace(" ", "", 1)
+      if n > 1:
+        aaa = ctx.author.name.replace("]", "", n-1)
+        tuple = aaa.partition("]")
+        embedname = list(tuple)[2].replace(" ", "", 1)
+    if "[" and "]" not in ctx.author.name:
+      embedname = ctx.author.name
     if five == None:
       embed = Embed(
-        title=ctx.author.name,
-        description=f"**Looking to:** {globalsubcommand} a {one}\n**Rating needed to join:** {two}\n**Strengths needed to join:** {three}\n**Recommended availability:** {four}",
+        title=embedname,
+        description=f"**Looking to:** {str(globalsubcommand).lower()} a {one}\n**Rating needed to join:** {two}\n**Strengths needed to join:** {three}\n**Recommended availability:** {four}",
         color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
     if five != None:
       embed = Embed(
-        title=ctx.author.name,
-        description=f"**Looking to:** {globalsubcommand} a {one}\n**Rating:** {two}\n**Strengths:** {three}\n**Weaknesses:** {four}\n**Availability:** {five}",
+        title=embedname,
+        description=f"**Looking to:** {str(globalsubcommand).lower()} a {one}\n**Rating:** {two}\n**Strengths:** {three}\n**Weaknesses:** {four}\n**Availability:** {five}",
         color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
     recruitmentchannel = discord.utils.find(lambda r: r.id == 888161164654170143, ctx.guild.channels)
     await recruitmentchannel.send(content="Type `/recruitment` in any channel to send a message here", embeds=embed)
