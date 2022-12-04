@@ -112,7 +112,7 @@ class inrole(interactions.Extension):
       if str(ctx.channel_id) not in "582646964466745364":
         ephemeral = True
     embed2 = Embed(
-      title=f"Current {sub_command}:",
+      title=f"Current {sub_command} ({len(names1)}):",
       description=str('\n'.join(names1)),
       color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
     await ctx.send(embeds=embed2, ephemeral=ephemeral)
