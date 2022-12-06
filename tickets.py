@@ -2,6 +2,7 @@ import interactions
 import discord
 import buttons
 from buttons import buttons
+import time
 
 class tickets(interactions.Extension):
   def __init__(self, bot):
@@ -131,6 +132,26 @@ class tickets(interactions.Extension):
         if str(channel.parent_id) in ["962455110150144100", "1007090636274552842"]: 
           await channel.modify(parent_id=694390326911303723)
           await channel.send(f"{ctx.author.mention} sent a message and re-opened the ticket!\n\nTo close this ticket, click the button on the pinned message")
+
+  @interactions.extension_command(
+    name="spammer",
+    description="deletes tickets made by the spammer",
+    scope=582644566641999874,
+    default_member_permissions=interactions.Permissions.MANAGE_CHANNELS,
+    options=[
+      interactions.Option(
+        name="name",
+        description="channel name you want to delete",
+        type=interactions.OptionType.STRING,
+        required=True)])
+  async def spammer(self, ctx: interactions.CommandContext, name):
+    staffchannel = discord.utils.find(lambda r: r.id == 704606362218266664, ctx.guild.channels)
+    for channel in ctx.guild.channels:
+      if channel.name == name:
+        await channel.delete()
+        await staffchannel.send(f"Deleted channel {channel.name}")
+        time.sleep(1)
+    await staffchannel.send("Done, deleted all channels")
 
   @interactions.extension_listener()
   async def on_ready(penis):
