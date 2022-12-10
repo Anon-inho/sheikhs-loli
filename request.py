@@ -152,8 +152,8 @@ class request(interactions.Extension):
       name=array[0],
       color=int(hex(int(array[1].replace("#", ""), 16)), 0))
     await ctx.guild.modify_role_position(role_id=int(role.id), position=position)
-    await ctx.guild.add_member_role(role=role.id, member_id=int(array[2].replace("<@!", "").replace(">", "")))
-    await ctx.guild.add_member_role(role=tc.id, member_id=int(array[2].replace("<@!", "").replace(">", "")))
+    await ctx.guild.add_member_role(role=role.id, member_id=int(array[2].replace("<@!", "").replace(">", "").replace("<@", "")))
+    await ctx.guild.add_member_role(role=tc.id, member_id=int(array[2].replace("<@!", "").replace(">", "").replace("<@", "")))
     lobby = discord.utils.find(lambda r: r.id == 582646950403506199, ctx.guild.channels)
     await lobby.send(f":white_check_mark: {array[2]}, your **{var} creation** request was **approved**")
     await ctx.edit(content=f"{ctx.message.content}\n\n:white_check_mark: **Approved by {ctx.author.mention}**", components=[], allowed_mentions={"parse": ["users"]})
