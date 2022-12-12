@@ -195,7 +195,7 @@ class result(interactions.Extension):
   @interactions.extension_component("menu1")
   async def menu1_response(self, ctx: interactions.ComponentContext, values):
     if str(authorglobal.id) not in str(ctx.author.id):
-        ctx.send(":x: Error", ephemeral=True)
+        await ctx.send(":x: Error", ephemeral=True)
     if str(authorglobal.id) in str(ctx.author.id):
         channel = await ctx.get_channel()
         message2 = await channel.send(components=menu2global, allowed_mentions={"parse": []})
@@ -209,7 +209,7 @@ class result(interactions.Extension):
   @interactions.extension_component("menu2")
   async def menu2_response(self, ctx: interactions.ComponentContext, values):
     if str(authorglobal.id) not in str(ctx.author.id):
-        ctx.send(":x: Error", ephemeral=True)
+        await ctx.send(":x: Error", ephemeral=True)
     if str(authorglobal.id) in str(ctx.author.id):
         data = '\n'.join(''.join(o) for o in ctx.data.values)
         result.menu2array.append(data)
