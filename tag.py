@@ -2,7 +2,6 @@ import interactions
 from interactions import Modal
 import discord
 from buttons import buttons
-import os
 
 class tag(interactions.Extension):
   def __init__(self, bot):
