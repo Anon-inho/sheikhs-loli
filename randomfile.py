@@ -84,8 +84,8 @@ class randomfile(interactions.Extension):
         n1 = ((num[0]/2)+num[0]/4)
         n3 = num[0]/2+num[0]/7
         n4 = num[1]/2
-        draw.polygon(((n1, 0), (n3, n4), (num[0], 0)), fill=000000)
-        draw.ellipse((-(num[1]/5), -num[1]/5, num[0]+(num[1]/5), int((num[1]/4)-((num[1]/4)/4))), fill=000000)
+        draw.polygon(((n1, -(num[1]/4)), (n3, n4-(num[1]/4)), (num[0], -(num[1]/16))), fill=000000)
+        draw.ellipse((0, -(num[1]/16), num[0], (num[1]/16)), fill=000000)
         image.save("blank.gif")
         file = interactions.File("blank.gif")
         embed = interactions.Embed()
