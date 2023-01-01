@@ -23,7 +23,7 @@ bot.load("request")
 bot.load("recruitment")
 bot.load("tag")
 bot.load("blacklist")
-# bot.load("docs")
+#bot.load("docs")
 
 @bot.event
 async def on_ready():
