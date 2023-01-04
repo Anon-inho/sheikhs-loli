@@ -123,6 +123,7 @@ class result(interactions.Extension):
               if teamroles.position > losers.position > otheroles.position:
                 resultschannel = discord.utils.find(lambda r: r.id == 881696478052089896, ctx.guild.channels)
                 await resultschannel.send(f"**{winners.mention} ({winners.name}): Winners**\n**{losers.mention} ({losers.name}): Losers**\n\n*{type} win*", allowed_mentions={"parse": []})
+                await ctx.send(":white_check_mark: Report send to <#881696478052089896>", ephemeral=True)
                 return
       if not ("1045752403951104030" in str(ctx.author.roles)) or ("799846360546541589" in str(ctx.author.roles)) or ("1045752403951104030" in str(ctx.author.roles)):
         await ctx.send(":x: You are not a team/trio/duo captain!", ephemeral=True)
@@ -235,6 +236,7 @@ class result(interactions.Extension):
       color=int(hex(int("586ce4".replace("#", ""), 16)), 0))
     embed.set_footer(text="United Corporation Governance Tournaments", icon_url="https://cdn.discordapp.com/icons/582644566641999874/565572bdb6c2c4cc6311f44623ef65a1.png")
     await resultschannel.send(embeds=embed)
+    await ctx.send(":white_check_mark: Report send to <#881696478052089896>", ephemeral=True)
     result.menu1array.clear()
     result.menu2array.clear()
   
