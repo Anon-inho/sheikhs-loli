@@ -161,7 +161,7 @@ class randomfile(interactions.Extension):
         color=int(hex(int("FF0000".replace("#", ""), 16)), 0))
       userembed.set_footer(text="United Corporation Governance Tournaments", icon_url="https://cdn.discordapp.com/icons/582644566641999874/565572bdb6c2c4cc6311f44623ef65a1.png")
       await ctx.send(embeds=serverembed)
-      await ctx.author.send(embeds=userembed)
+      await member.send(embeds=userembed)
       return
     if not ("1091554735754055790" in str(ctx.author.roles)) or ("582646885265833984" in str(ctx.author.roles)):
       await ctx.send(":x: You are not a <@&1091554735754055790>", ephemeral=True)
