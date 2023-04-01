@@ -132,6 +132,40 @@ class randomfile(interactions.Extension):
           array.append(f"<@!{user}>")
         fuck = "\n".join(array)
         await ctx.send(f"List of people whitelisted:\n\n{fuck}", ephemeral=True)
+  
+  @interactions.extension_command(
+    name="warn",
+    description="Warns an user",
+    scope=582644566641999874,
+    options=[
+      interactions.Option(
+        name="member",
+        description="Member to warn",
+        type=interactions.OptionType.USER,
+        required=True),
+      interactions.Option(
+        name="reason",
+        description="Warn reason",
+        type=interactions.OptionType.STRING,
+        requred=True)])
+  async def warn(self, ctx: interactions.CommandContext, member, reason):
+    if ("1091554735754055790" in str(ctx.author.roles)) or ("582646885265833984" in str(ctx.author.roles)):
+      serverembed = interactions.Embed(
+        title="Warn",
+        description=f"{member.mention} **has been warned by** {ctx.author.mention}\n**Reason:** {reason}",
+        color=int(hex(int("FF0000".replace("#", ""), 16)), 0))
+      serverembed.set_footer(text="United Corporation Governance Tournaments", icon_url="https://cdn.discordapp.com/icons/582644566641999874/565572bdb6c2c4cc6311f44623ef65a1.png")
+      userembed = interactions.Embed(
+        title="Warn",
+        description=f"**You have been warned by {ctx.author.mention} in UCGT**\n**Reason:** {reason}",
+        color=int(hex(int("FF0000".replace("#", ""), 16)), 0))
+      userembed.set_footer(text="United Corporation Governance Tournaments", icon_url="https://cdn.discordapp.com/icons/582644566641999874/565572bdb6c2c4cc6311f44623ef65a1.png")
+      await ctx.send(embeds=serverembed)
+      await ctx.author.send(embeds=userembed)
+      return
+    if not ("1091554735754055790" in str(ctx.author.roles)) or ("582646885265833984" in str(ctx.author.roles)):
+      await ctx.send(":x: You are not a <@&1091554735754055790>", ephemeral=True)
+      return
 
   @interactions.extension_listener()
   async def on_ready(penis):
