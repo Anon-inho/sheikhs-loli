@@ -135,7 +135,7 @@ class randomfile(interactions.Extension):
   
   @interactions.extension_command(
     name="warn",
-    description="Warns an user",
+    description="Warns an user (fake warn)",
     scope=582644566641999874,
     options=[
       interactions.Option(
@@ -149,7 +149,7 @@ class randomfile(interactions.Extension):
         type=interactions.OptionType.STRING,
         requred=True)])
   async def warn(self, ctx: interactions.CommandContext, member, reason):
-    if ("1091554735754055790" in str(ctx.author.roles)) or ("582646885265833984" in str(ctx.author.roles)):
+    if ("582646886696091669" in str(ctx.author.roles)) or ("582646885265833984" in str(ctx.author.roles)):
       serverembed = interactions.Embed(
         title="Warn",
         description=f"{member.mention} **has been warned by** {ctx.author.mention}\n**Reason:** {reason}",
@@ -163,8 +163,8 @@ class randomfile(interactions.Extension):
       await ctx.send(embeds=serverembed)
       await member.send(embeds=userembed)
       return
-    if not ("1091554735754055790" in str(ctx.author.roles)) or ("582646885265833984" in str(ctx.author.roles)):
-      await ctx.send(":x: You are not a <@&1091554735754055790>", ephemeral=True)
+    if not ("582646886696091669" in str(ctx.author.roles)) or ("582646885265833984" in str(ctx.author.roles)):
+      await ctx.send(":x: You are not a <@&582646886696091669>", ephemeral=True)
       return
 
   @interactions.extension_listener()
